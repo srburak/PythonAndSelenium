@@ -31,11 +31,9 @@ class Test_Demo:
     #@pytest.mark.skip()
     @pytest.mark.parametrize("username,password",[("1","1"),("kullanıcıadım","sifrem")])
     def test_invalit_login(self,username,password):
-         # En fazla 5 saniye olacak şeklide user-name id'li elementin görünmesini bekle 
-        WebDriverWait(self.driver,5).until(expected_conditions.visibility_of_element_located((By.ID,"user-name")))
+        self.waitForElementVisible((By.ID,"user-name"))
         usernameInput = self.driver.find_element(By.ID , "user-name")
-        # En fazla 5 saniye olacak şeklide password id'li elementin görünmesini bekle 
-        WebDriverWait(self.driver,5).until(expected_conditions.visibility_of_element_located((By.ID,"password")))
+        self.waitForElementVisible((By.ID,"password"))
         passwordInput = self.driver.find_element(By.ID , "password")
         usernameInput.send_keys(username)
         passwordInput.send_keys(password)
@@ -44,3 +42,6 @@ class Test_Demo:
         errorMesage = self.driver.find_element(By.XPATH,"//*[@id='login_button_container']/div/form/div[3]/h3")
         self.driver.save_screenshot(f"{self.folderPath}/test_invalit_login{username}_{password}.png")
         assert errorMesage.text == "Epic sadface: Username and password do not match any user in this service"
+
+    def waitForElementVisible(self,locator,timeout=5):
+        WebDriverWait(self.driver,timeout).until(expected_conditions.visibility_of_element_located((locator)))
