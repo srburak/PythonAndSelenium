@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.common.action_chains import ActionChains
+import globalConstants
 
 class Test_Sauce:
 
@@ -23,7 +24,7 @@ class Test_Sauce:
         print(f"TEST SONUCU : {testResult}")
 
     def test_valit_login(self):
-        self.driver.get("https://www.saucedemo.com/")
+        self.driver.get(globalConstants.URL)
         WebDriverWait(self.driver,5).until(expected_conditions.visibility_of_element_located((By.ID,"user-name")))
         usernameInput = self.driver.find_element(By.ID , "user-name")
         # En fazla 5 saniye olacak şeklide password id'li elementin görünmesini bekle 
