@@ -8,7 +8,7 @@ import pytest
 from pathlib import Path
 from datetime import date
 import openpyxl
-import globalConstants
+from constants import globalConstants
 
 class Test_Demo:
 
